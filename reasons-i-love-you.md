@@ -71,18 +71,27 @@
       font-weight: bold;
     }
 
-    .next-btn {
+    .nav-btn {
       display: block;
-      margin-top: 30px;
       text-align: center;
-      padding: 14px 20px;
-      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-      color: #1b2735;
+      padding: 12px 15px;
       font-weight: bold;
       text-decoration: none;
       border-radius: 20px;
+      font-size: 0.9rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #1b2735;
       box-shadow: 0 0 15px rgba(161, 196, 253, 0.5);
-      font-size: 1rem;
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     @keyframes fadeIn {
@@ -201,34 +210,27 @@
       <li>Out of the billions of people on Earth, my heart somehow found the exact person it wanted... you. 🤍</li>
     </ol>
 
-    <a href="README.md" class="next-btn">Next Surprise ✨</a>
+    <div style="display: flex; gap: 10px; margin-top: 30px;">
+      <a href="index.html" class="nav-btn btn-back" style="flex: 1;">⬅️ Back</a>
+      <a href="final.html" class="nav-btn btn-next" style="flex: 2;">Next Surprise ✨</a>
+    </div>
   </div>
 
   <script>
-    // Starfield Background
     const canvas = document.getElementById('galaxyCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
     const numStars = 150;
     let mouse = { x: null, y: null, radius: 100 };
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     function updateCoords(e) {
-      if (e.touches) {
-        mouse.x = e.touches[0].clientX;
-        mouse.y = e.touches[0].clientY;
-      } else {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      }
+      if (e.touches) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; }
+      else { mouse.x = e.clientX; mouse.y = e.clientY; }
     }
-
     window.addEventListener('mousemove', updateCoords);
     window.addEventListener('touchstart', updateCoords);
     window.addEventListener('touchmove', updateCoords);
@@ -237,23 +239,14 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.baseX = this.x;
-        this.baseY = this.y;
+        this.baseX = this.x; this.baseY = this.y;
         this.size = Math.random() * 2 + 0.5;
         this.density = (Math.random() * 20) + 1;
       }
-
-      draw() {
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
+      draw() { ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
       update() {
         if (mouse.x !== null && mouse.y !== null) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
+          let dx = mouse.x - this.x; let dy = mouse.y - this.y;
           let distance = Math.sqrt(dx * dx + dy * dy);
           if (distance < mouse.radius) {
             let force = (mouse.radius - distance) / mouse.radius;
@@ -267,35 +260,16 @@
       }
     }
 
-    function init() {
-      stars = [];
-      for (let i = 0; i < numStars; i++) stars.push(new Star());
-    }
+    function init() { stars = []; for (let i = 0; i < numStars; i++) stars.push(new Star()); }
+    function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); stars.forEach(s => { s.draw(); s.update(); }); requestAnimationFrame(animate); }
+    init(); animate();
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < stars.length; i++) {
-        stars[i].draw();
-        stars[i].update();
-      }
-      requestAnimationFrame(animate);
-    }
-
-    init();
-    animate();
-
-    // Tap Hearts
     window.addEventListener('click', (e) => {
       const heart = document.createElement('div');
       heart.innerHTML = '💖';
-      heart.style.position = 'fixed';
-      heart.style.left = `${e.clientX}px`;
-      heart.style.top = `${e.clientY}px`;
-      heart.style.fontSize = '24px';
-      heart.style.pointerEvents = 'none';
-      heart.style.transform = 'translate(-50%, -50%)';
-      heart.style.transition = 'all 1s ease-out';
-      heart.style.zIndex = '9999';
+      heart.style.position = 'fixed'; heart.style.left = `${e.clientX}px`; heart.style.top = `${e.clientY}px`;
+      heart.style.fontSize = '24px'; heart.style.pointerEvents = 'none'; heart.style.transform = 'translate(-50%, -50%)';
+      heart.style.transition = 'all 1s ease-out'; heart.style.zIndex = '9999';
       document.body.appendChild(heart);
       setTimeout(() => { heart.style.top = `${e.clientY - 60}px`; heart.style.opacity = '0'; }, 50);
       setTimeout(() => heart.remove(), 1000);
