@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hey, my moon 🤍</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    #galaxyCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 30px 20px;
+      max-width: 440px;
+      width: 88%;
+      margin: 40px auto;
+      text-align: left;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1, h2 {
+      color: #ff9a9e;
+      text-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+    }
+
+    h1 { text-align: center; font-size: 1.8rem; }
+    h2 { font-size: 1.2rem; margin-top: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+
+    .code-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      padding: 15px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #a1c4fd;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 15px 0;
+      white-space: pre-wrap;
+    }
+
+    ul, ol { padding-left: 20px; }
+    li { padding: 4px 0; font-size: 0.95rem; opacity: 0.95; }
+
+    .nav-btn {
+      display: block;
+      text-align: center;
+      padding: 12px 15px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 30px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="galaxyCanvas"></canvas>
+
+  <div class="container">
+    <h1>Hey, my moon 🤍</h1>
+
+    <div class="code-box">
+Initializing...
+Loading happiness [████████████████████] 100%
+
+✓ Connected to your heart.
+✓ Distance detected.
+✓ Love unaffected.
+✓ Forever mode enabled.
+    </div>
+
+    <h2>About This Project</h2>
+    <p>This repository contains the most beautiful person I've ever met.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>🤍 Makes me smile without trying.</li>
+      <li>🌙 Lives far away but somehow always feels close.</li>
+      <li>💌 Turns ordinary days into my favorite memories.</li>
+      <li>🫂 Gives me peace just by existing.</li>
+      <li>✨ 10/10. Would choose again every lifetime.</li>
+    </ul>
+
+    <div class="code-box">
+const myMoon = {
+  beautiful: true,
+  kind: true,
+  adorable: true,
+  funny: true,
+  precious: true,
+  loved: Infinity
+};
+
+while (true) {
+  protect(myMoon);
+  support(myMoon);
+  appreciate(myMoon);
+  love(myMoon);
+}
+    </div>
+
+    <h2>Bug Report</h2>
+    <p>❌ "Long distance"<br><strong>Status:</strong> Still not fixed.</p>
+    <p><strong>Temporary solution:</strong></p>
+    <ul>
+      <li>📞 FaceTime</li>
+      <li>☀️ Good morning texts</li>
+      <li>🌙 Good night texts</li>
+      <li>🤍 Random "I miss you" messages</li>
+      <li>⏳ Future hugs loading...</li>
+    </ul>
+
+    <h2>Installation Guide</h2>
+    <ol>
+      <li>Smile.</li>
+      <li>Read my messages.</li>
+      <li>Remember you're loved.</li>
+      <li>Repeat forever.</li>
+    </ol>
+
+    <h2>System Status</h2>
+    <p>❤️ <strong>Love:</strong> ∞ &nbsp;|&nbsp; 🌍 <strong>Distance:</strong> Temporary<br>
+    💍 <strong>Loyalty:</strong> 100% &nbsp;|&nbsp; 🌙 <strong>Missing You:</strong> Every day<br>
+    🤍 <strong>Giving Up:</strong> Never</p>
+
+    <h2>Commit History</h2>
+    <div class="code-box">
+git commit -m "Met the most amazing girl."
+git commit -m "Fell in love."
+git commit -m "Still falling."
+git commit -m "Still choosing her."
+git commit -m "Forever isn't long enough."
+    </div>
+
+    <h2>Final Output</h2>
+    <p>If I had one wish, it wouldn't be money, or fame, or anything like that.</p>
+    <p>I'd wish for the distance between us to disappear, just so I could hold your hand, look into your eyes, and remind you in person that you're the best thing that's ever happened to me.</p>
+
+    <a href="reasons.html" class="nav-btn">⬅️ Back to Reasons</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 150;
+    let mouse = { x: null, y: null, radius: 100 };
+
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function updateCoords(e) {
+      if (e.touches) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; }
+      else { mouse.x = e.clientX; mouse.y = e.clientY; }
+    }
+    window.addEventListener('mousemove', updateCoords);
+    window.addEventListener('touchstart', updateCoords);
+    window.addEventListener('touchmove', updateCoords);
+
+    class Star {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.baseX = this.x; this.baseY = this.y;
+        this.size = Math.random() * 2 + 0.5;
+        this.density = (Math.random() * 20) + 1;
+      }
+      draw() { ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      update() {
+        if (mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < mouse.radius) {
+            let force = (mouse.radius - distance) / mouse.radius;
+            this.x -= (dx / distance) * force * this.density;
+            this.y -= (dy / distance) * force * this.density;
+          } else {
+            if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 10;
+            if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 10;
+          }
+        }
+      }
+    }
+
+    function init() { stars = []; for (let i = 0; i < numStars; i++) stars.push(new Star()); }
+    function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); stars.forEach(s => { s.draw(); s.update(); }); requestAnimationFrame(animate); }
+    init(); animate();
+
+    window.addEventListener('click', (e) => {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.style.position = 'fixed'; heart.style.left = `${e.clientX}px`; heart.style.top = `${e.clientY}px`;
+      heart.style.fontSize = '24px'; heart.style.pointerEvents = 'none'; heart.style.transform = 'translate(-50%, -50%)';
+      heart.style.transition = 'all 1s ease-out'; heart.style.zIndex = '9999';
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.style.top = `${e.clientY - 60}px`; heart.style.opacity = '0'; }, 50);
+      setTimeout(() => heart.remove(), 1000);
+    });
+  </script>
+</body>
+</html>
