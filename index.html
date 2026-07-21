@@ -121,9 +121,9 @@
       text-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
     }
 
-    /* Hidden Secret Button when loading hits 100% */
+    /* Button Linking to Reasons File */
     .secret-btn {
-      display: none;
+      display: inline-block;
       margin-top: 15px;
       padding: 12px 20px;
       background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
@@ -132,17 +132,21 @@
       text-decoration: none;
       border-radius: 20px;
       box-shadow: 0 0 15px rgba(255, 154, 158, 0.6);
-      animation: popIn 0.5s ease-out forwards;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease-out;
+      pointer-events: none;
+    }
+
+    .secret-btn.show {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -318,7 +322,7 @@
       }, 1000);
     }
 
-    // Animated Loading Bar Logic
+    // Animated Loading Bar
     let progress = 0;
     const progressFill = document.getElementById('progressFill');
     const statusText = document.getElementById('statusText');
@@ -332,9 +336,9 @@
       } else {
         clearInterval(interval);
         statusText.innerText = 'Status: Complete! ✨';
-        secretButton.style.display = 'inline-block';
+        secretButton.classList.add('show');
       }
-    }, 40); // Fills up in ~4 seconds
+    }, 40);
   </script>
 </body>
 </html>
