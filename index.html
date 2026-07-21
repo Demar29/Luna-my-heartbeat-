@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Future 🌙</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #galaxyCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 420px;
+      width: 85%;
+      margin: 40px auto;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      text-align: left;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .greeting {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #fecfef;
+      margin-bottom: 5px;
+      opacity: 0.9;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #ff9a9e;
+      text-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+      margin-top: 5px;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      color: #a1c4fd;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    li:hover {
+      transform: translateX(6px);
+      color: #ffb199;
+    }
+
+    /* Status Bar Styling */
+    .status-box {
+      margin-top: 25px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      height: 12px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+      width: 0%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ff9a9e;
+      transition: width 0.1s linear;
+    }
+
+    .objective {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff6b6b;
+      margin-top: 10px;
+      text-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+    }
+
+    /* Hidden Secret Button when loading hits 100% */
+    .secret-btn {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      color: #1b2735;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 154, 158, 0.6);
+      animation: popIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="galaxyCanvas"></canvas>
+
+  <div class="container">
+    <div class="greeting">Hi & Good Morning, Luna 💖</div>
+    <h1>Future Plans 🌙</h1>
+
+    <h2>Short Term</h2>
+    <ul>
+      <li>📞 More late-night calls.</li>
+      <li>💬 More "good morning" texts.</li>
+      <li>🍿 Watch movies together.</li>
+      <li>😂 Laugh until we can't breathe.</li>
+    </ul>
+
+    <h2>Long Term</h2>
+    <ul>
+      <li>✈️ Meet you.</li>
+      <li>🤝 Hold your hand.</li>
+      <li>🫂 Hug you forever.</li>
+      <li>📸 Make memories together.</li>
+      <li>🌅 Watch sunsets together.</li>
+      <li>👵👴 Grow old together.</li>
+    </ul>
+
+    <div class="status-box">
+      <div id="statusText" style="font-size: 0.85rem; opacity: 0.8;">Status: Loading... 0%</div>
+      <div class="progress-bar-bg">
+        <div id="progressFill" class="progress-bar-fill"></div>
+      </div>
+      <div class="objective">Final objective: ❤️ Together.</div>
+      
+      <a id="secretButton" href="reasons-i-love-you.md" class="secret-btn">💌 Reasons I Love You</a>
+    </div>
+  </div>
+
+  <script>
+    // Starfield Background
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 150;
+    let mouse = { x: null, y: null, radius: 100 };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function updateCoords(e) {
+      if (e.touches) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      } else {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }
+    }
+
+    window.addEventListener('mousemove', updateCoords);
+    window.addEventListener('touchstart', updateCoords);
+    window.addEventListener('touchmove', updateCoords);
+    window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+    window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
+
+    class Star {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.size = Math.random() * 2 + 0.5;
+        this.density = (Math.random() * 20) + 1;
+      }
+
+      draw() {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      update() {
+        if (mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            let forceDirectionX = dx / distance;
+            let forceDirectionY = dy / distance;
+            let maxDistance = mouse.radius;
+            let force = (maxDistance - distance) / maxDistance;
+            let directionX = forceDirectionX * force * this.density;
+            let directionY = forceDirectionY * force * this.density;
+
+            this.x -= directionX;
+            this.y -= directionY;
+          } else {
+            if (this.x !== this.baseX) {
+              let dx = this.x - this.baseX;
+              this.x -= dx / 10;
+            }
+            if (this.y !== this.baseY) {
+              let dy = this.y - this.baseY;
+              this.y -= dy / 10;
+            }
+          }
+        } else {
+          if (this.x !== this.baseX) {
+            let dx = this.x - this.baseX;
+            this.x -= dx / 10;
+          }
+          if (this.y !== this.baseY) {
+            let dy = this.y - this.baseY;
+            this.y -= dy / 10;
+          }
+        }
+      }
+    }
+
+    function init() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push(new Star());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < stars.length; i++) {
+        stars[i].draw();
+        stars[i].update();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    // Floating Hearts on Tap
+    window.addEventListener('click', (e) => {
+      createHeart(e.clientX, e.clientY);
+    });
+
+    function createHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.style.position = 'fixed';
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      heart.style.fontSize = '24px';
+      heart.style.pointerEvents = 'none';
+      heart.style.transform = 'translate(-50%, -50%)';
+      heart.style.transition = 'all 1s ease-out';
+      heart.style.zIndex = '9999';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.style.top = `${y - 60}px`;
+        heart.style.opacity = '0';
+      }, 50);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    }
+
+    // Animated Loading Bar Logic
+    let progress = 0;
+    const progressFill = document.getElementById('progressFill');
+    const statusText = document.getElementById('statusText');
+    const secretButton = document.getElementById('secretButton');
+
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        progress += 1;
+        progressFill.style.width = progress + '%';
+        statusText.innerText = `Status: Loading... ${progress}%`;
+      } else {
+        clearInterval(interval);
+        statusText.innerText = 'Status: Complete! ✨';
+        secretButton.style.display = 'inline-block';
+      }
+    }, 40); // Fills up in ~4 seconds
+  </script>
+</body>
+</html>
